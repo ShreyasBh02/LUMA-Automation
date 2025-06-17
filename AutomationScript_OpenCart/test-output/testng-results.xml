@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="0" failed="1" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2025-06-17T23:18:07 IST" name="Suite" finished-at="2025-06-17T23:18:57 IST" duration-ms="50142">
+    <groups>
+    </groups>
+    <test started-at="2025-06-17T23:18:07 IST" name="SearchFunctionality" finished-at="2025-06-17T23:18:57 IST" duration-ms="50142">
+      <class name="testcases.TC_ProductSearchFunctionality">
+        <test-method is-config="true" signature="loadUser()[pri:0, instance:testcases.TC_ProductSearchFunctionality@5c3b6c6e]" started-at="2025-06-17T23:18:06 IST" name="loadUser" finished-at="2025-06-17T23:18:07 IST" duration-ms="182" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loadUser -->
+        <test-method is-config="true" signature="websetup()[pri:0, instance:testcases.TC_ProductSearchFunctionality@5c3b6c6e]" started-at="2025-06-17T23:18:07 IST" name="websetup" finished-at="2025-06-17T23:18:19 IST" duration-ms="11616" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- websetup -->
+        <test-method signature="SearchFunctionality(java.util.HashMap)[pri:0, instance:testcases.TC_ProductSearchFunctionality@5c3b6c6e]" started-at="2025-06-17T23:18:19 IST" name="SearchFunctionality" data-provider="Product Data Provider" finished-at="2025-06-17T23:18:57 IST" duration-ms="37926" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[{=, SearchKeyword1=Jacket, SearchKeyword2=Mens t-shirt}]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[❌ The following titles do not match keyword 'jacket':
+Beaumont Summit Kit
+Phoebe Zipper Sweatshirt
+Proteus Fitness Jackshirt
+Mars HeatTech™ Pullover
+Taurus Elements Shell
+Compete Track Tote expected [true] but found [false]]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: ❌ The following titles do not match keyword 'jacket':
+Beaumont Summit Kit
+Phoebe Zipper Sweatshirt
+Proteus Fitness Jackshirt
+Mars HeatTech™ Pullover
+Taurus Elements Shell
+Compete Track Tote expected [true] but found [false]
+at org.testng.Assert.fail(Assert.java:111)
+at org.testng.Assert.failNotEquals(Assert.java:1590)
+at org.testng.Assert.assertTrue(Assert.java:57)
+at testcases.TC_ProductSearchFunctionality.SearchFunctionality(TC_ProductSearchFunctionality.java:89)
+at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+at org.testng.TestRunner.privateRun(TestRunner.java:741)
+at org.testng.TestRunner.run(TestRunner.java:616)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+at org.testng.TestNG.runSuites(TestNG.java:1112)
+at org.testng.TestNG.run(TestNG.java:1079)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- SearchFunctionality -->
+        <test-method is-config="true" signature="afterSuite()[pri:0, instance:testcases.TC_ProductSearchFunctionality@5c3b6c6e]" started-at="2025-06-17T23:18:57 IST" name="afterSuite" finished-at="2025-06-17T23:18:58 IST" duration-ms="1026" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterSuite -->
+      </class> <!-- testcases.TC_ProductSearchFunctionality -->
+    </test> <!-- SearchFunctionality -->
+  </suite> <!-- Suite -->
+</testng-results>

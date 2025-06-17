@@ -1,0 +1,22 @@
+[INFO ] 2025-06-17 23:12:05.180 [main] Class - Sign-in button clicked successfully.
+[INFO ] 2025-06-17 23:12:05.196 [main] Class - Navigated to the Customer Login page.
+[INFO ] 2025-06-17 23:12:06.394 [main] Class - Create Account button clicked successfully.
+[INFO ] 2025-06-17 23:12:06.394 [main] Class - Navigated to the Customer Login page.
+[INFO ] 2025-06-17 23:12:21.477 [main] Class - Opened Putsbox to create a new inbox.
+[INFO ] 2025-06-17 23:12:23.052 [main] Class - New inbox created successfully: justen@putsbox.com
+[INFO ] 2025-06-17 23:12:23.220 [main] Class - First name entered successfully: justen
+[INFO ] 2025-06-17 23:12:23.386 [main] Class - Last name entered successfully: Austin
+[INFO ] 2025-06-17 23:12:23.567 [main] Class - Email entered successfully: justen@putsbox.com
+[INFO ] 2025-06-17 23:12:23.716 [main] Class - Confirm password entered successfully: ADmin@1234
+[INFO ] 2025-06-17 23:12:23.889 [main] Class - Confirm password entered successfully: ADmin@1234
+[INFO ] 2025-06-17 23:12:27.496 [main] Class - Create account button clicked successfully.
+[INFO ] 2025-06-17 23:12:27.497 [main] Class - Filled in the account creation form with provided data.
+[INFO ] 2025-06-17 23:12:32.413 [main] Class - Clicked on the option: SignOut
+[INFO ] 2025-06-17 23:12:32.413 [main] Class - User signed out successfully.
+[INFO ] 2025-06-17 23:12:50.421 [main] Class - Sign-in button clicked successfully.
+[INFO ] 2025-06-17 23:12:50.421 [main] Class - Navigated to the Customer Login page.
+[INFO ] 2025-06-17 23:12:50.620 [main] Class - Username entered successfully: justen@putsbox.com
+[INFO ] 2025-06-17 23:12:50.794 [main] Class - Password entered successfully: ADmin@1234
+[INFO ] 2025-06-17 23:13:17.723 [main] Class - Sign-in button clicked successfully.
+[INFO ] 2025-06-17 23:18:21.592 [main] Class - Product searched: Jacket
+[INFO ] 2025-06-17 23:18:21.594 [main] Class - Product searched successfully: Jacket
