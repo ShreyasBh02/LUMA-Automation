@@ -24,7 +24,9 @@ import baseclass.BaseClass;
 import dataprovider.DataProviders;
 import pomclass.CreateAnAccount;
 import pomclass.CustomerLogin;
+import pomclass.HeaderOptions;
 import pomclass.HomePage;
+import pomclass.ProductListingPage;
 import utilityclass.EmailHelper;
 import utilityclass.ExtentManager;
 import utilityclass.LoggerUtil;
@@ -36,6 +38,9 @@ public class TC_ProductSearchFunctionality extends BaseClass {
 	HomePage 	  homePage;
 	CreateAnAccount createAnAccount;
 	EmailHelper emailHelper;
+	HeaderOptions headerOptions;
+	ProductListingPage productListingPage;
+	
 	WebDriverWait wait;	
 	private String mainWindowHandle;
 	
@@ -57,7 +62,25 @@ public class TC_ProductSearchFunctionality extends BaseClass {
 		mainWindowHandle = getDriver().getWindowHandle();
 		wait= new WebDriverWait(getDriver(), Duration.ofSeconds(10));
 		try {
+			
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='search']")));
+
+			// Handle Google Ad pop-up if it appears
+		    try {
+		        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+		        Thread.sleep(2000); 
+		        WebElement googleAdPopup = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='ad_position_box']")));
+				if (googleAdPopup.isDisplayed()) {
+					WebElement cancelButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='dismiss-button']"))); 
+					cancelButton.click();
+					System.out.println("Closed the Google Ad pop-up.");
+					
+				} 
+				
+		    } catch (Exception e) {
+		        System.out.println("No Google Ad pop-up appeared.");
+		    }
+		    
 			homePage.searchProduct(hashMapvalue.get("SearchKeyword1"));
 			Logs.info("Product searched successfully: " + hashMapvalue.get("SearchKeyword1"));
 			ExtentManager.log("Searched for product: " + hashMapvalue.get("SearchKeyword1"), Status.INFO);
@@ -98,10 +121,40 @@ public class TC_ProductSearchFunctionality extends BaseClass {
 	}
 
 
+	@Test(dataProvider = "Product Data Provider", dataProviderClass = DataProviders.class)
+	public void FilterByCategory(HashMap<String,String> hashMapvalue)  throws Throwable {
+		mainWindowHandle = getDriver().getWindowHandle();
+		wait= new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+		try {
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='search']")));
+			Thread.sleep(2000);
+			headerOptions.ClickMainOptions(getDriver(), "Men");
+			headerOptions.ClickMenOptions(getDriver(), "Tops");
+			headerOptions.ClickMenSubOptions(getDriver(), "Tees");
+			Thread.sleep(2000);
+			
+			//action.handleAdPopupIfPresent(getDriver());
+			//Verify the URL
+			action.waitForPageLoad(getDriver(), 30);
+			String currentUrl = getDriver().getCurrentUrl();
+			Assert.assertTrue(currentUrl.contains("/men/tops-men/tees-men"), "URL does not contain 'catalogsearch/result'");
+			productListingPage.selectFilterOption("Size", "XS");
+			productListingPage.selectFilterOption("Color", "Black"); 
+			
+			
+		}
+		catch(Exception e) {
+			Logs.error("An error occurred during the test execution: " + e.getMessage(), e);
+			ExtentManager.log("Test failed due to an error: " + e.getMessage(), Status.FAIL);
+		}
+	}
+
 	public void initialize() {
 		login = new CustomerLogin();
 		homePage = new HomePage();
         createAnAccount = new CreateAnAccount();
         emailHelper = new EmailHelper(getDriver());
+        headerOptions = new HeaderOptions();
+        productListingPage = new ProductListingPage();
 	}
 }

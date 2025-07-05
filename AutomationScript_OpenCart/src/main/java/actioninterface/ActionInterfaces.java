@@ -53,4 +53,6 @@ public interface ActionInterfaces {
 	public void waitForElementToBeClickable(WebDriver driver, WebElement element, Duration timeOut);
 	 public String getElementText(WebElement element);
 	 public void waitForPageLoad(WebDriver driver,int timeoutInSeconds);
+	 public void  handleAdPopupIfPresent(WebDriver driver);
+	 
 }

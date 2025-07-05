@@ -631,5 +631,47 @@ public class actionclass extends BaseClass implements ActionInterfaces {
 		}
 		return text;
 	}
+	@Override
+	/**
+	 * Handles and closes Google Ads or modals if present on the page.
+	 */
+
+	public void handleAdPopupIfPresent(WebDriver driver) {
+		try {
+			List<WebElement> allFrames = driver.findElements(By.tagName("iframe"));
+			boolean adFound = false;
+
+			for (WebElement frame : allFrames) 
+			{
+				driver.switchTo().frame(frame);
+				List<WebElement> adIframes = driver.findElements(By.xpath("//div[contains(@id,'aswift_')]//iframe[contains(@style, 'opacity: 1')]"));
+				if (!adIframes.isEmpty()) {
+					adFound = true; 
+					System.out.println("Ad iframe found in frame: " + driver.getTitle());
+					driver.switchTo().frame(adIframes.get(0));
+					try {
+						WebElement closeButton = driver.findElement(By.xpath("//div[@id='ad_position_box']//div[@id='dismiss-button']"));
+						if (closeButton.isDisplayed()) {
+							closeButton.click();
+							System.out.println("Closed the ad popup.");
+						}
+					} catch (Exception e) {
+						System.out.println("Close button not found or not clickable: " + e.getMessage());
+					}
+
+					driver.switchTo().parentFrame(); 
+					break; 
+				}
+				driver.switchTo().defaultContent();
+			}
+			if (!adFound) {
+				System.out.println("No ad popup found.");
+			}
+		} catch (Exception e) {
+			System.out.println("Error while handling ad popup: " + e.getMessage());
+			driver.switchTo().defaultContent(); 
+		}
+	}
+
 
 }

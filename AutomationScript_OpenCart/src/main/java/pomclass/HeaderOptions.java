@@ -26,11 +26,11 @@ public class HeaderOptions extends BaseClass {
 	actionclass action=new actionclass();
 	private WebDriverWait wait;	
 	Actions act = new Actions(getDriver());
-	
-	
-	
+
+
+
 	private static final Logger logger = LogManager.getLogger(LoggerUtil.class.getClass());
-	
+
 	// XPath
 	//HeaderOptions page
 	@FindBy(xpath = "//header[@class='page-header']//li[@class='authorization-link']//a") 									private WebElement clickSignInBtn;
@@ -43,9 +43,10 @@ public class HeaderOptions extends BaseClass {
 
 	//Method/ Functions
 	public void clickOption(WebElement option, String selectedOption) throws Throwable {
-		
+
 		act.moveToElement(option).build().perform();
 		wait.until(ExpectedConditions.elementToBeClickable(option));
+		act.moveToElement(option).build().perform();
 		option.click();
 		logger.info("Clicked on the option: " + selectedOption);
 	}
@@ -79,7 +80,10 @@ public class HeaderOptions extends BaseClass {
 				logger.error("Invalid option provided: " + Option);
 				return; 
 			}
-			clickOption(selectedOption, Option);
+			//clickOption(selectedOption, Option);
+			act.moveToElement(selectedOption).build().perform();
+			wait.until(ExpectedConditions.elementToBeClickable(selectedOption));
+			logger.info("Mouse hover over on the option: " + Option);
 
 		} catch (Exception e) {
 			logger.error("Error occurred while clicking '" + Option + "': " + e.getMessage(), e);
@@ -87,8 +91,8 @@ public class HeaderOptions extends BaseClass {
 
 	}
 
-	public void ClickWomenSubOptions(WebDriver driver, String Option) throws Throwable {
-		WebElement optionBlock = driver.findElement(By.xpath("//a[@id='ui-id-4']/following-sibling::ul]"));
+	public void ClickWomenOptions(WebDriver driver, String Option) throws Throwable {
+		WebElement optionBlock = driver.findElement(By.xpath("//a[@id='ui-id-4']/following-sibling::ul"));
 		Thread.sleep(500);
 		wait.until(ExpectedConditions.visibilityOf(optionBlock));
 		WebElement selectedOption = null; 
@@ -106,42 +110,68 @@ public class HeaderOptions extends BaseClass {
 			}
 
 			clickOption(selectedOption, Option);
-			
+			/*act.moveToElement(selectedOption).build().perform();
+			wait.until(ExpectedConditions.elementToBeClickable(selectedOption));
+			logger.info("Mouse hover over on the option: " + Option);
+			 */
+
 		} catch (Exception e) {
 			logger.error("Error occurred while clicking '" + Option + "': " + e.getMessage(), e);
 		}
 	}
 
 	// Need to updated xpath
-	public void ClickMenSubOptions(WebDriver driver, String Option) throws Throwable {
-		WebElement optionBlock = driver.findElement(By.xpath("//a[@id='ui-id-4']/following-sibling::ul]"));
+	public void ClickMenOptions(WebDriver driver, String Option) throws Throwable {
+		WebElement optionBlock = driver.findElement(By.xpath("//a[@id='ui-id-5']/following-sibling::ul"));
 		Thread.sleep(500);
 		wait.until(ExpectedConditions.visibilityOf(optionBlock));
 		WebElement selectedOption = null; 
 		try {
 			switch (Option) {
 			case "Tops":
-				selectedOption = optionBlock.findElement(By.xpath(".//a[@id='ui-id-9']"));
+				selectedOption = optionBlock.findElement(By.xpath(".//a[@id='ui-id-17']"));
 				break;
 			case "Bottoms":
-				selectedOption = optionBlock.findElement(By.xpath(".//a[@id='ui-id-4']"));
+				selectedOption = optionBlock.findElement(By.xpath(".//a[@id='ui-id-18']"));
 				break;
 			default:
 				logger.error("Invalid option provided: " + Option);
 				return;
 			}
 
-			clickOption(selectedOption, Option);
-			
+			//clickOption(selectedOption, Option);
+			act.moveToElement(selectedOption).build().perform();
+			wait.until(ExpectedConditions.elementToBeClickable(selectedOption));
+			logger.info("Mouse hover over on the option: " + Option);
+
 		} catch (Exception e) {
 			logger.error("Error occurred while clicking '" + Option + "': " + e.getMessage(), e);
 		}
 	}
-	
-	
-	
-	
-	
+
+	/**
+	 * Clicks on a specified sub-option under the "Men" category in the menu.
+	 *
+	 * @param driver The WebDriver instance used to interact with the browser.
+	 * @param option The text of the sub-option to be clicked (e.g., "Jackets", "Hoodies & Sweatshirts", "Tees", "Tanks").
+	 * @throws Throwable If an error occurs during the execution of the method.
+	 */
+
+	public void ClickMenSubOptions(WebDriver driver, String Option) throws Throwable {
+		WebElement optionBlock = driver.findElement(By.xpath("//a[@id='ui-id-5']/following-sibling::ul"));
+		Thread.sleep(500);
+		wait.until(ExpectedConditions.visibilityOf(optionBlock));
+		WebElement selectedOption = null; 
+		try {
+			selectedOption = optionBlock.findElement(By.xpath(".//a[span[contains(text(),'" + Option + "')]]"));
+			clickOption(selectedOption, Option);
+
+		} catch (Exception e) {
+			logger.error("Error occurred while clicking '" + Option + "': " + e.getMessage(), e);
+		}
+	}
+
+
 
 }
 

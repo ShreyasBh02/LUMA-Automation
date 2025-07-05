@@ -3,14 +3,15 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="RegressionSuites.TC_CreateUser">
+      <class name="testcases.TC_ProductSearchFunctionality">
         <methods>
-          <include name="CreateNewUser"/>
           <include name="websetup"/>
+          <include name="FilterByCategory"/>
           <include name="loadUser"/>
           <include name="afterSuite"/>
+          <include name="SearchFunctionality"/>
         </methods>
-      </class> <!-- RegressionSuites.TC_CreateUser -->
+      </class> <!-- testcases.TC_ProductSearchFunctionality -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

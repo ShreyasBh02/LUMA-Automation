@@ -1,16 +1,22 @@
 package baseclass;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
@@ -67,8 +73,33 @@ public class BaseClass {
 	 */
 	public void launchWebApp(String browserName, String URL) throws Throwable {
 		if (browserName.equalsIgnoreCase("Chrome")) {
-			WebDriverManager.chromedriver().setup();
+
+			/*	WebDriverManager.chromedriver().setup();
 			driver.set(new ChromeDriver());
+			*/
+			ChromeOptions options = new ChromeOptions();
+			File crxFile = new File(System.getProperty("user.dir") + "/src/test/resources/extensions/ublock-origin.crx");
+			System.out.println("CRX file exists: " + crxFile.exists());
+			System.out.println("CRX file path: " + crxFile.getAbsolutePath());
+
+			if (crxFile.exists()) {
+			    try {
+			        options.addExtensions(crxFile);
+			    } catch (Exception e) {
+			        System.out.println("Error loading CRX extension: " + e.getMessage());
+			        e.printStackTrace();
+			    }
+			} else {
+			    System.out.println("Skipping CRX extension – file not found.");
+			}
+
+			// Add other Chrome arguments
+			options.addArguments("--disable-notifications");
+			options.addArguments("--disable-popup-blocking");
+			// Launch browser
+			driver.set(new ChromeDriver(options));
+		
+		
 		} else if (browserName.equalsIgnoreCase("Firefox")) {
 			WebDriverManager.firefoxdriver().setup();
 			driver.set(new FirefoxDriver());
@@ -84,10 +115,10 @@ public class BaseClass {
 
 		// Set timeouts using Duration
 		getDriver().manage().timeouts()
-			.implicitlyWait(Duration.ofSeconds(Integer.parseInt(prop.getProperty("implicitWait", "30"))));
+		.implicitlyWait(Duration.ofSeconds(Integer.parseInt(prop.getProperty("implicitWait", "30"))));
 
 		getDriver().manage().timeouts()
-			.pageLoadTimeout(Duration.ofSeconds(Integer.parseInt(prop.getProperty("pageLoadTimeOut", "60"))));
+		.pageLoadTimeout(Duration.ofSeconds(Integer.parseInt(prop.getProperty("pageLoadTimeOut", "60"))));
 
 		// Launch URL
 		getDriver().get(URL);
@@ -97,8 +128,11 @@ public class BaseClass {
 
 		// Wait for the page to load completely
 		actionclass action = new actionclass();
-		int timeout = Integer.parseInt(prop.getProperty("pageLoadTimeOut", "20"));
+		int timeout = Integer.parseInt(prop.getProperty("pageLoadTimeOut", "30"));
 		action.waitForPageLoad(getDriver(), timeout);
+
+
+
 	}
 
 	/**
