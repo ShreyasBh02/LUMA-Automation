@@ -1,0 +1,84 @@
+## ✅ **Test Case: Create New User**
+
+### 🧪 **Objective:**
+
+Verify that a new user can successfully register using valid data and is able to log in using the same credentials.
+
+---
+
+### 🔢 **Test Steps:**
+
+---
+
+### 1. **Navigate to Home Page**
+
+* Launch browser and navigate to the homepage using URL from config.
+
+---
+
+### 2. **Click on "Sign In"**
+
+* Validate redirection to **Customer Login Page**.
+
+---
+
+### 3. **Click on "Create Account"**
+
+* Assert that the URL contains `"create"` to confirm you're on the **Create Account Page**.
+
+---
+
+### 4. **Generate Dynamic Email via PutsBox**
+
+* Call `emailHelper.openPutsbox(driver)`.
+* Call `emailHelper.createNewInbox(driver)` to get a random email (e.g., `john123@putsbox.com`).
+* Extract `FirstName` using `emailHelper.extractName(emailId)` (e.g., from `john123`).
+* Close the PutsBox tab using `emailHelper.ClosePutsbox(driver)`.
+
+---
+
+### 5. **Fill in Registration Form**
+
+* createAnAccount.enterFirstName(FirstName)`
+* createAnAccount.enterLastName(userData.getLastName())`
+* createAnAccount.enterEmail(emailId)`
+* createAnAccount.enterPassword(userData.getPassword())`
+* createAnAccount.enterConfirmPassword(userData.getPassword())`
+
+---
+
+### 6. **Submit Form**
+
+* `createAnAccount.clickCreateAccount()`
+
+---
+
+### 7. **Verify Registration Success**
+
+* Wait for redirection or success message.
+* Assert user is logged in (e.g., by checking if the account name is visible or URL changed).
+* Optionally, capture a screenshot or log success.
+
+---
+
+### 8. **Log Out**
+
+* Click on user profile/account dropdown.
+* Click `Sign Out` or equivalent.
+* Verify redirection back to home or login page.
+
+---
+
+### 9. **Log Back In**
+
+* Reuse `emailId` and `userData.getPassword()` to fill in login fields.
+* Submit the form.
+* Verify successful login again by checking account visibility or welcome message.
+
+---
+
+### ✅ **Postconditions:**
+
+* User is logged in with a valid, dynamically created account.
+
+---
